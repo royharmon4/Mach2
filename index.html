@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mach 2 Marketing | Strategy & Execution for B2B SaaS</title>
+    <style>
+        /* ─────────────────────────────────────────
+           DESIGN TOKENS
+        ───────────────────────────────────────── */
+        :root {
+            --ink:           #0d1520;
+            --ink-mid:       #131e2e;
+            --blue:          #2563eb;
+            --blue-hover:    #1d4ed8;
+            --blue-light:    #eff6ff;
+            --blue-mid:      #dbeafe;
+            --blue-muted:    #60a5fa;
+            --slate:         #475569;
+            --slate-light:   #64748b;
+            --slate-lighter: #94a3b8;
+            --body-bg:       #ffffff;
+            --surface:       #f8fafc;
+            --border:        #e2e8f0;
+            --border-dark:   rgba(255,255,255,0.07);
+
+            --font-serif: "Iowan Old Style", "Apple Garamond", "Palatino Linotype", Georgia, serif;
+            --font-sans:  ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+            --radius-sm:   8px;
+            --radius-md:   12px;
+            --radius-lg:   16px;
+            --radius-full: 100px;
+
+            --shadow-blue-md: 0 4px 20px rgba(37,99,235,0.18);
+            --shadow-blue-lg: 0 8px 32px rgba(37,99,235,0.28);
+
+            --ease: 0.2s ease;
+
+            --max-w: 1160px;
+            --pad-x: 2rem;
+            --pad-y: 6rem;
+        }
+
+        /* ─────────────────────────────────────────
+           RESET
+        ───────────────────────────────────────── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-sans);
+            color: var(--ink);
+            background: var(--body-bg);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.5;
+        }
+        img, svg { display: block; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ─────────────────────────────────────────
+           LAYOUT
+        ───────────────────────────────────────── */
+        .wrap {
+            max-width: var(--max-w);
+            margin-inline: auto;
+            padding-inline: var(--pad-x);
+        }
+
+        .section-pad { padding-block: var(--pad-y); }
+
+        /* ─────────────────────────────────────────
+           TYPOGRAPHY
+        ───────────────────────────────────────── */
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--blue);
+        }
+        .eyebrow::before,
+        .eyebrow::after {
+            content: '';
+            display: block;
+            width: 22px;
+            height: 1px;
+            background: var(--blue);
+            opacity: .45;
+        }
+
+        .section-label {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+        .section-label--light { color: var(--blue-muted); }
+
+        .h-display {
+            font-family: var(--font-serif);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            line-height: 1.06;
+            letter-spacing: -.02em;
+            color: var(--ink);
+        }
+        .h-section {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -.02em;
+            color: var(--ink);
+            margin-bottom: 1.25rem;
+        }
+        .h-section--light { color: #fff; }
+        .h-section em,
+        .h-display  em  { font-style: italic; color: var(--blue); }
+        .h-section--light em { color: rgba(255,255,255,.5); }
+
+        .body-lg { font-size: 1.05rem; line-height: 1.72; color: var(--slate); font-weight: 300; }
+        .body-md { font-size: .95rem;  line-height: 1.65; color: var(--slate); font-weight: 300; }
+        .body-sm { font-size: .875rem; line-height: 1.65; color: var(--slate); font-weight: 300; }
+
+        /* ─────────────────────────────────────────
+           BUTTONS
+        ───────────────────────────────────────── */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            font-family: var(--font-sans);
+            font-size: .9rem;
+            font-weight: 600;
+            letter-spacing: -.01em;
+            padding: .875rem 1.875rem;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            transition:
+                background var(--ease),
+                transform   var(--ease),
+                box-shadow  var(--ease),
+                border-color var(--ease);
+            white-space: nowrap;
+        }
+        .btn svg { width: 16px; height: 16px; }
+
+        .btn-primary {
+            background: var(--blue);
+            color: #fff;
+            box-shadow: var(--shadow-blue-lg);
+        }
+        .btn-primary:hover {
+            background: var(--blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 32px rgba(37,99,235,.38);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 1.5px solid var(--border);
+        }
+        .btn-secondary:hover {
+            border-color: #93c5fd;
+            background: var(--blue-light);
+        }
+
+        .btn-white {
+            background: #fff;
+            color: var(--blue);
+            box-shadow: 0 8px 32px rgba(0,0,0,.18);
+        }
+        .btn-white:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 40px rgba(0,0,0,.25);
+        }
+
+        .btn-nav {
+            background: var(--blue);
+            color: #fff;
+            padding: .5rem 1.25rem;
+            font-size: .85rem;
+        }
+        .btn-nav:hover { background: var(--blue-hover); transform: translateY(-1px); }
+
+        /* ─────────────────────────────────────────
+           NAVIGATION
+        ───────────────────────────────────────── */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            background: rgba(255,255,255,.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav__bar {
+            max-width: var(--max-w);
+            margin-inline: auto;
+            padding-inline: var(--pad-x);
+            height: 68px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        /* Logo */
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: .625rem;
+            flex-shrink: 0;
+        }
+        .logo__mark {
+            width: 34px; height: 34px;
+            background: var(--blue);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            color: #fff;
+        }
+        .logo__mark svg { width: 18px; height: 18px; }
+        .logo__text { font-size: 1.05rem; font-weight: 700; color: var(--ink); letter-spacing: -.02em; }
+        .logo__text span { color: var(--blue); }
+
+        /* Desktop links */
+        .nav__links {
+            display: flex;
+            align-items: center;
+            gap: 2.25rem;
+        }
+        .nav__links a {
+            font-size: .875rem;
+            font-weight: 500;
+            color: var(--slate);
+            transition: color var(--ease);
+        }
+        .nav__links a:hover { color: var(--blue); }
+        .nav__links a.btn-nav,
+        .nav__links a.btn-nav:hover { color: #fff; }
+
+        /* Hamburger */
+        .nav__burger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--ink);
+            padding: .25rem;
+        }
+        .nav__burger svg { width: 24px; height: 24px; }
+
+        /* Mobile drawer */
+        .nav__drawer {
+            display: none;
+            flex-direction: column;
+            background: #fff;
+            border-top: 1px solid var(--border);
+            padding: .5rem var(--pad-x) 1.25rem;
+        }
+        .nav__drawer a {
+            font-size: .95rem;
+            font-weight: 500;
+            color: var(--slate);
+            padding: .75rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: color var(--ease);
+        }
+        .nav__drawer a:hover { color: var(--blue); }
+        .nav__drawer .btn-primary {
+            margin-top: .875rem;
+            justify-content: center;
+            border-bottom: none;
+            padding: .875rem 1.875rem;
+        }
+        .nav__drawer.is-open { display: flex; }
+
+        @media (max-width: 860px) {
+            .nav__links  { display: none; }
+            .nav__burger { display: flex; }
+        }
+
+        /* ─────────────────────────────────────────
+           HERO
+        ───────────────────────────────────────── */
+        .hero {
+            position: relative;
+            padding-top: 152px;
+            padding-bottom: 96px;
+            padding-inline: var(--pad-x);
+            text-align: center;
+            overflow: hidden;
+            background: var(--body-bg);
+        }
+        @media (max-width: 600px) {
+            .hero { padding-top: 120px; padding-bottom: 64px; }
+        }
+
+        .hero__glow {
+            position: absolute;
+            top: -200px; left: 50%; transform: translateX(-50%);
+            width: 900px; height: 600px;
+            background: radial-gradient(ellipse at center, rgba(37,99,235,.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .hero__grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(37,99,235,.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37,99,235,.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
+            -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 80%);
+        }
+
+        .hero__content {
+            position: relative;
+            z-index: 1;
+            max-width: 820px;
+            margin-inline: auto;
+        }
+
+        .hero__eyebrow { margin-bottom: 1.75rem; animation: fadeUp .6s ease both; }
+        .hero__heading { margin-bottom: 1.5rem;  animation: fadeUp .6s .1s ease both; }
+
+        .hero__sub {
+            max-width: 520px;
+            margin-inline: auto;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            line-height: 1.72;
+            color: var(--slate);
+            font-weight: 300;
+            animation: fadeUp .6s .2s ease both;
+        }
+
+        .hero__ctas {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .875rem;
+            justify-content: center;
+            animation: fadeUp .6s .3s ease both;
+        }
+
+        /* ─────────────────────────────────────────
+           STRIP
+        ───────────────────────────────────────── */
+        .strip {
+            background: var(--ink);
+            padding: 1rem var(--pad-x);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .strip__item {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,.55);
+            white-space: nowrap;
+        }
+        .strip__dot {
+            width: 4px; height: 4px;
+            border-radius: 50%;
+            background: var(--blue);
+            opacity: .7;
+            flex-shrink: 0;
+        }
+
+        /* ─────────────────────────────────────────
+           PROBLEM
+        ───────────────────────────────────────── */
+        .problem { background: var(--body-bg); border-bottom: 1px solid var(--border); }
+
+        .problem__grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        @media (max-width: 768px) { .problem__grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+        .problem__body p { margin-bottom: 1.25rem; }
+        .problem__body p:last-child { margin-bottom: 0; }
+
+        .callout {
+            background: var(--blue-light);
+            border-left: 3px solid var(--blue);
+            padding: 1.75rem 2rem;
+            border-radius: 0 var(--radius-md) var(--radius-md) 0;
+            margin-top: 2rem;
+        }
+        .callout__heading {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--ink);
+            margin-bottom: .625rem;
+        }
+        .callout p { font-size: .95rem; color: #334155; line-height: 1.65; }
+
+        /* ─────────────────────────────────────────
+           SERVICES
+        ───────────────────────────────────────── */
+        .services {
+            background: var(--surface);
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .services__grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-top: 3.5rem;
+        }
+        @media (max-width: 640px) { .services__grid { grid-template-columns: 1fr; } }
+
+        .service-card {
+            background: var(--body-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+        }
+        .service-card:hover {
+            border-color: #93c5fd;
+            box-shadow: 0 8px 32px rgba(37,99,235,.07);
+            transform: translateY(-2px);
+        }
+        .service-card__icon {
+            width: 44px; height: 44px;
+            background: var(--blue-light);
+            border-radius: var(--radius-sm);
+            display: flex; align-items: center; justify-content: center;
+            color: var(--blue);
+            margin-bottom: 1.25rem;
+            flex-shrink: 0;
+        }
+        .service-card__icon svg,
+        .service-card__icon i { width: 20px; height: 20px; display: flex; }
+        .service-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -.01em;
+            margin-bottom: .5rem;
+        }
+
+        /* ─────────────────────────────────────────
+           PROCESS
+        ───────────────────────────────────────── */
+        .process { background: var(--body-bg); }
+
+        .process__intro { max-width: 640px; margin-bottom: 4rem; }
+        .process__intro p { margin-top: 1rem; }
+
+        .process__steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            position: relative;
+        }
+        @media (max-width: 900px) { .process__steps { grid-template-columns: 1fr 1fr; gap: 2.5rem; } }
+        @media (max-width: 520px)  { .process__steps { grid-template-columns: 1fr; } }
+
+        .process__step {
+            position: relative;
+            padding-left: 0;
+        }
+
+        .step-num {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--border);
+            background: var(--body-bg);
+            display: flex; align-items: center; justify-content: center;
+            font-size: .8rem;
+            font-weight: 700;
+            color: var(--blue);
+            margin-bottom: 1.25rem;
+        }
+        .step-num--active {
+            background: var(--blue);
+            border-color: var(--blue);
+            color: #fff;
+        }
+        .process__step h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--ink);
+            letter-spacing: -.01em;
+            margin-bottom: .5rem;
+        }
+
+        /* ─────────────────────────────────────────
+           WHO WE WORK WITH — light bg
+        ───────────────────────────────────────── */
+        .who {
+            background: var(--blue-light);
+            border-top: 1px solid var(--blue-mid);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fit-list { margin-top: 2rem; max-width: 640px; }
+        .fit-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: .75rem;
+            padding: .875rem 0;
+            border-bottom: 1px solid rgba(0,0,0,.07);
+            font-size: .9rem;
+            color: #334155;
+            line-height: 1.55;
+            font-weight: 300;
+        }
+        .fit-list li:last-child { border-bottom: none; }
+
+        .fit-check {
+            flex-shrink: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: rgba(37,99,235,.12);
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+            color: var(--blue);
+        }
+        .fit-check svg { width: 11px; height: 11px; }
+
+        /* ── The Difference ── */
+        .difference {
+            background: var(--body-bg);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .outcomes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 3.5rem;
+        }
+        @media (max-width: 900px) { .outcomes-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 560px)  { .outcomes-grid { grid-template-columns: 1fr; } }
+
+        .outcome-item {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem 1.75rem;
+            display: flex;
+            gap: .75rem;
+            align-items: flex-start;
+        }
+        .outcome-item svg { color: var(--blue); flex-shrink: 0; width: 16px; height: 16px; margin-top: 3px; }
+        .outcome-item p { font-size: .875rem; color: var(--slate); line-height: 1.55; font-weight: 300; }
+
+        /* ─────────────────────────────────────────
+           RESULTS — dark bg
+        ───────────────────────────────────────── */
+        .results {
+            background: var(--ink);
+            border-top: 1px solid rgba(255,255,255,.06);
+            border-bottom: 1px solid rgba(255,255,255,.06);
+        }
+
+        .results__grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            margin-top: 3.5rem;
+        }
+        @media (max-width: 800px) { .results__grid { grid-template-columns: 1fr; } }
+
+        .result-card {
+            background: var(--ink-mid);
+            border: 1px solid var(--border-dark);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: .875rem;
+        }
+        .result-card__company {
+            font-size: 1rem;
+            font-weight: 600;
+            color: rgba(255,255,255,.5);
+            letter-spacing: .01em;
+        }
+        .result-card p { font-size: .95rem; color: rgba(255,255,255,.75); line-height: 1.65; font-weight: 300; }
+        .result-card strong { font-weight: 700; color: var(--blue-muted); }
+
+        /* ─────────────────────────────────────────
+           LEADERSHIP
+        ───────────────────────────────────────── */
+        .leadership { background: var(--body-bg); }
+
+        .leadership__grid {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 5rem;
+            align-items: start;
+        }
+        @media (max-width: 768px) { .leadership__grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+        .leadership__body p { margin-bottom: 1.1rem; }
+        .leadership__body p:last-child { margin-bottom: 0; }
+
+        .capabilities {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+        .capabilities h3 {
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--slate-lighter);
+            margin-bottom: 1.25rem;
+        }
+        .cap-list li {
+            display: flex;
+            align-items: center;
+            gap: .625rem;
+            padding: .625rem 0;
+            font-size: .875rem;
+            font-weight: 500;
+            color: #334155;
+            border-bottom: 1px solid var(--border);
+        }
+        .cap-list li:last-child { border-bottom: none; }
+        .cap-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); flex-shrink: 0; }
+
+        /* ─────────────────────────────────────────
+           CTA
+        ───────────────────────────────────────── */
+        .cta {
+            background: var(--blue);
+            padding-block: var(--pad-y);
+            padding-inline: var(--pad-x);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta__bg {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+            background-size: 48px 48px;
+        }
+        .cta__glow {
+            position: absolute;
+            bottom: -200px; right: -100px;
+            width: 600px; height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .cta__content {
+            position: relative;
+            z-index: 1;
+            max-width: 620px;
+            margin-inline: auto;
+        }
+        .cta .h-section { color: #fff; margin-bottom: 1.5rem; }
+        .cta .h-section em { color: rgba(255,255,255,.5); }
+        .cta__sub {
+            font-size: 1rem;
+            color: rgba(255,255,255,.72);
+            line-height: 1.72;
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
+        .cta__sub strong { color: #fff; font-weight: 500; }
+
+        /* ─────────────────────────────────────────
+           FOOTER
+        ───────────────────────────────────────── */
+        .footer {
+            background: var(--body-bg);
+            border-top: 1px solid var(--border);
+            padding: 2.25rem var(--pad-x);
+        }
+        .footer__inner {
+            max-width: var(--max-w);
+            margin-inline: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 1.25rem;
+        }
+        .footer__links { display: flex; gap: 2rem; }
+        .footer__links a {
+            font-size: .8rem;
+            font-weight: 500;
+            color: var(--slate-lighter);
+            transition: color var(--ease);
+        }
+        .footer__links a:hover { color: var(--blue); }
+        .footer__copy { font-size: .8rem; color: var(--slate-lighter); }
+
+        /* ─────────────────────────────────────────
+           ANIMATION
+        ───────────────────────────────────────── */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(22px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+</head>
+<body>
+
+<!-- ── Nav ── -->
+<header class="nav" id="nav">
+    <div class="nav__bar">
+        <a href="#" class="logo" aria-label="Mach 2 Marketing home">
+            <div class="logo__mark"><i data-lucide="zap"></i></div>
+            <span class="logo__text">Mach 2 <span>Marketing</span></span>
+        </a>
+
+        <nav class="nav__links" aria-label="Primary">
+            <a href="#problem">The Problem</a>
+            <a href="#services">What We Do</a>
+            <a href="#process">How We Work</a>
+            <a href="#results">Results</a>
+            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DX5tqaWjcXwaBljA6wNuZx_Zll-2ol9e7SePhr7IF6U1gHy3UCkVL2n1lZnL35og0lOKHXbk-" class="btn btn-nav">Book a call</a>
+        </nav>
+
+        <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <i data-lucide="menu" id="burger-icon"></i>
+        </button>
+    </div>
+
+    <nav class="nav__drawer" id="drawer" aria-label="Mobile">
+        <a href="#problem"  class="drawer-link">The Problem</a>
+        <a href="#services" class="drawer-link">What We Do</a>
+        <a href="#process"  class="drawer-link">How We Work</a>
+        <a href="#results"  class="drawer-link">Results</a>
+        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DX5tqaWjcXwaBljA6wNuZx_Zll-2ol9e7SePhr7IF6U1gHy3UCkVL2n1lZnL35og0lOKHXbk-" class="btn btn-primary">
+            Book a strategy call <i data-lucide="arrow-right"></i>
+        </a>
+    </nav>
+</header>
+
+<!-- ── Hero ── -->
+<section class="hero">
+    <div class="hero__glow"  aria-hidden="true"></div>
+    <div class="hero__grid"  aria-hidden="true"></div>
+
+    <div class="hero__content">
+        <p class="eyebrow hero__eyebrow">For Founders, CEOs &amp; Marketing Leaders</p>
+        <h1 class="h-display hero__heading">Stop guessing.<br><em>Start growing.</em></h1>
+        <p class="hero__sub">We help B2B SaaS companies fix the upstream issues stifling growth and build a real system for turning strategy into pipeline.</p>
+        <div class="hero__ctas">
+            <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DX5tqaWjcXwaBljA6wNuZx_Zll-2ol9e7SePhr7IF6U1gHy3UCkVL2n1lZnL35og0lOKHXbk-" class="btn btn-primary">Book a strategy call <i data-lucide="arrow-right"></i></a>
+            <a href="#process" class="btn btn-secondary">See how we work</a>
+        </div>
+    </div>
+</section>
+
+<!-- ── Strip ── -->
+<div class="strip" aria-hidden="true">
+    <span class="strip__item">Strategy-first</span>
+    <span class="strip__dot"></span>
+    <span class="strip__item">System-driven</span>
+    <span class="strip__dot"></span>
+    <span class="strip__item">Execution-focused</span>
+</div>
+
+<!-- ── Problem ── -->
+<section id="problem" class="problem">
+    <div class="wrap section-pad">
+        <div class="problem__grid">
+            <div>
+                <p class="section-label">The Problem</p>
+                <h2 class="h-section">Tactics won't fix a <em>strategy</em> problem.</h2>
+            </div>
+            <div>
+                <div class="problem__body body-lg">
+                    <p>When your marketing team is busy but growth still feels uncertain, the root cause is usually upstream.</p>
+                    <p>You don't need more tactics. The key to growth is structure and follow-through.</p>
+                    <p>If your marketing team is doing a lot, but you still aren't confident about what's working and what should happen next, we should talk.</p>
+                </div>
+                <div class="callout">
+                    <p class="callout__heading">That's the problem we fix.</p>
+                    <p>We help B2B SaaS companies identify the challenges holding them back, build a better system, and create the structure needed to turn strategy into consistent execution.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Services ── -->
+<section id="services" class="services">
+    <div class="wrap section-pad">
+        <p class="section-label">What We Do</p>
+        <h2 class="h-section">What we fix</h2>
+
+        <div class="services__grid">
+            <div class="service-card">
+                <div class="service-card__icon"><i data-lucide="crosshair"></i></div>
+                <h3>Positioning and messaging</h3>
+                <p class="body-sm">Clarify what you do, who it's for, why it matters, and why buyers should choose you over the alternatives.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon"><i data-lucide="map"></i></div>
+                <h3>Marketing strategy</h3>
+                <p class="body-sm">Set better priorities, make smarter bets, and stop wasting time on disconnected activity.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon"><i data-lucide="cog"></i></div>
+                <h3>Execution systems</h3>
+                <p class="body-sm">Build the operating rhythm, ownership, and accountability needed to make sure the work actually gets done.</p>
+            </div>
+            <div class="service-card">
+                <div class="service-card__icon"><i data-lucide="users"></i></div>
+                <h3>Fractional marketing leadership</h3>
+                <p class="body-sm">Senior-level strategic guidance to keep the strategy sharp, the team aligned, and execution moving.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Process ── -->
+<section id="process" class="process">
+    <div class="wrap section-pad">
+        <div class="process__intro">
+            <p class="section-label">Process</p>
+            <h2 class="h-section">How we work</h2>
+            <p class="body-lg">We don't hand over a strategy deck and disappear. A better plan only has value when there's a system to ensure its successful execution. That's why we follow the same four-phase approach for every engagement.</p>
+        </div>
+
+        <div class="process__steps">
+            <div class="process__step">
+                <div class="step-num">1</div>
+                <h4>Diagnose</h4>
+                <p class="body-sm">Find the real constraint. We assess positioning, messaging, funnel, team, and priorities to identify what's actually holding growth back.</p>
+            </div>
+            <div class="process__step">
+                <div class="step-num">2</div>
+                <h4>Clarify</h4>
+                <p class="body-sm">Define what matters. We sharpen the strategy, identify high-impact opportunities, and hone your messaging.</p>
+            </div>
+            <div class="process__step">
+                <div class="step-num">3</div>
+                <h4>Systemize</h4>
+                <p class="body-sm">Build the structure. Define priorities, ownership, workflows, reporting, and decision rules to create the conditions for successful execution.</p>
+            </div>
+            <div class="process__step">
+                <div class="step-num step-num--active">4</div>
+                <h4>Implement</h4>
+                <p class="body-sm">Keep it moving. We stay close to focus your team, remove blockers, and maintain momentum.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Who We Work With ── -->
+<section id="who" class="who">
+    <div class="wrap section-pad">
+        <p class="section-label">Who We Work With</p>
+        <h2 class="h-section">We're a strong fit for:</h2>
+        <ul class="fit-list">
+            <li><span class="fit-check"><i data-lucide="check"></i></span>B2B SaaS companies that need sharper strategy and clearer positioning</li>
+            <li><span class="fit-check"><i data-lucide="check"></i></span>Founder-led companies where marketing has become reactive, messy, or hard to evaluate</li>
+            <li><span class="fit-check"><i data-lucide="check"></i></span>Growth-stage teams that need a better system before adding more tools, channels, or headcount</li>
+            <li><span class="fit-check"><i data-lucide="check"></i></span>Marketing leaders who need outside perspective, stronger prioritization, and more follow-through</li>
+            <li><span class="fit-check"><i data-lucide="check"></i></span>Companies with execution in motion but no clear framework tying message, priorities, ownership, and pipeline together</li>
+        </ul>
+    </div>
+</section>
+
+<!-- ── The Difference ── -->
+<section id="difference" class="difference">
+    <div class="wrap section-pad">
+        <p class="section-label">The Difference</p>
+        <h2 class="h-section">What a real system makes possible</h2>
+        <div class="outcomes-grid">
+            <div class="outcome-item"><i data-lucide="trending-up"></i><p>Positioning becomes a competitive advantage, not an afterthought</p></div>
+            <div class="outcome-item"><i data-lucide="message-square"></i><p>Messaging resonates with the right buyers</p></div>
+            <div class="outcome-item"><i data-lucide="calendar"></i><p>Priorities hold for more than a week</p></div>
+            <div class="outcome-item"><i data-lucide="check-square"></i><p>Work gets done without constant leadership intervention</p></div>
+            <div class="outcome-item"><i data-lucide="bar-chart-2"></i><p>Pipeline becomes something you can explain and improve</p></div>
+            <div class="outcome-item"><i data-lucide="wallet"></i><p>Marketing spend feels like investment, not overhead</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Results ── -->
+<section id="results" class="results">
+    <div class="wrap section-pad">
+        <p class="section-label section-label--light">Selected Results</p>
+        <h2 class="h-section h-section--light">What this looks like in practice</h2>
+
+        <div class="results__grid">
+            <div class="result-card">
+                <p class="result-card__company">LeadPost</p>
+                <p>Grew new revenue by <strong>33x</strong>, tripled lead volume, and tripled total revenue through repositioning, demand generation, and a rebuilt marketing system.</p>
+            </div>
+            <div class="result-card">
+                <p class="result-card__company">TestGorilla</p>
+                <p>Supported an eight-figure Series A fundraise by building the inbound marketing and SEO engine that drove sustained pipeline growth.</p>
+            </div>
+            <div class="result-card">
+                <p class="result-card__company">Healthcare SaaS</p>
+                <p>Tripled ARR in one year, earned an Inc. 5000 ranking, and positioning the company for a successful acquisition.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── Leadership ── -->
+<section id="leadership" class="leadership">
+    <div class="wrap section-pad">
+        <div class="leadership__grid">
+            <div>
+                <p class="section-label">Who's Behind This</p>
+                <h2 class="h-section">Senior-led strategy.</h2>
+                <div class="leadership__body body-lg">
+                    <p>Every engagement is led by a senior strategist with over a decade of experience helping B2B SaaS companies grow.</p>
+                    <p>Prior experience includes in-house and consulting roles at companies including LeadPost, Fusion Web Clinic, and TestGorilla.</p>
+                    <p>Our model is designed to give clients sharp thinking, clear priorities, and real execution support without the overhead of a traditional agency.</p>
+                </div>
+            </div>
+            <div>
+                <div class="capabilities">
+                    <h3>Core Capabilities</h3>
+                    <ul class="cap-list">
+                        <li><span class="cap-dot"></span>Marketing strategy</li>
+                        <li><span class="cap-dot"></span>Positioning and messaging</li>
+                        <li><span class="cap-dot"></span>Demand generation</li>
+                        <li><span class="cap-dot"></span>Execution systems &amp; ops</li>
+                        <li><span class="cap-dot"></span>Fractional CMO / leadership</li>
+                        <li><span class="cap-dot"></span>Marketing audits &amp; assessments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ── CTA ── -->
+<section id="contact" class="cta">
+    <div class="cta__bg"   aria-hidden="true"></div>
+    <div class="cta__glow" aria-hidden="true"></div>
+    <div class="cta__content">
+        <h2 class="h-section">Let's fix the <em>real</em> problem.</h2>
+        <p class="cta__sub">
+            <strong>If your marketing feels busy but not focused, it's time to act.</strong><br><br>
+            You don't need more disconnected tactics. You need sharper positioning, a better system, and follow-through that turns good plans into real progress.
+        </p>
+        <a href="https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ0DX5tqaWjcXwaBljA6wNuZx_Zll-2ol9e7SePhr7IF6U1gHy3UCkVL2n1lZnL35og0lOKHXbk-" class="btn btn-white">
+            Book a strategy call <i data-lucide="arrow-right"></i>
+        </a>
+    </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer">
+    <div class="footer__inner">
+        <a href="#" class="logo" aria-label="Mach 2 Marketing home">
+            <div class="logo__mark"><i data-lucide="zap"></i></div>
+            <span class="logo__text">Mach 2 <span>Marketing</span></span>
+        </a>
+        <nav class="footer__links" aria-label="Footer">
+            <a href="#problem">The Problem</a>
+            <a href="#services">Services</a>
+            <a href="#results">Results</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <p class="footer__copy">© 2026 Mach 2 Marketing. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="https://unpkg.com/lucide@latest"></script>
+<script>
+    lucide.createIcons();
+
+    // Mobile nav toggle
+    const burger     = document.getElementById('burger');
+    const drawer     = document.getElementById('drawer');
+    const burgerIcon = document.getElementById('burger-icon');
+
+    burger.addEventListener('click', () => {
+        const isOpen = drawer.classList.toggle('is-open');
+        burger.setAttribute('aria-expanded', isOpen);
+        burgerIcon.setAttribute('data-lucide', isOpen ? 'x' : 'menu');
+        lucide.createIcons();
+    });
+
+    // Close on any drawer link click
+    drawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+            drawer.classList.remove('is-open');
+            burger.setAttribute('aria-expanded', false);
+            burgerIcon.setAttribute('data-lucide', 'menu');
+            lucide.createIcons();
+        });
+    });
+</script>
+</body>
+</html>
